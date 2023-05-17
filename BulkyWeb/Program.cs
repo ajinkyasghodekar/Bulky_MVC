@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     );
 
 // Adding Builder services for Category Repo
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOFWork>();
 
 var app = builder.Build();
 
