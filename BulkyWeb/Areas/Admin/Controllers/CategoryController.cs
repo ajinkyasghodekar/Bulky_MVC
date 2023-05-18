@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace BulkyBookWeb.Controllers
+namespace BulkyBookWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +22,7 @@ namespace BulkyBookWeb.Controllers
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
-        
+
         // Create Methods View
         public IActionResult Create()
         {
@@ -33,7 +34,7 @@ namespace BulkyBookWeb.Controllers
         public IActionResult Create(Category obj)
         {
             // Custom validation
-            if(obj.Name == obj.DisplayOrder.ToString())
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("Name", "Display Name and Order cannot be same...");
             }
@@ -44,13 +45,13 @@ namespace BulkyBookWeb.Controllers
                 TempData["success"] = "Category Created Successfully !!!";
                 return RedirectToAction("Index");
             }
-            return View();            
+            return View();
         }
 
         // Edit Methods View
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
@@ -58,7 +59,7 @@ namespace BulkyBookWeb.Controllers
             //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id == id);
             //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id == id).FirstOrDefault();
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(u=>u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -69,7 +70,7 @@ namespace BulkyBookWeb.Controllers
         // Edit Methods Edit a record
         [HttpPost]
         public IActionResult Edit(Category obj)
-        {   
+        {
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Update(obj);
