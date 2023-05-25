@@ -17,6 +17,12 @@ namespace BulkyBook.DataAccess.Data
         // Creating table for Product model 
         public DbSet<Product> Products { get; set; }
 
+        // Adding a more columns to Identity Table 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        // Creating table for Company model 
+        public DbSet<Company> Companies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
