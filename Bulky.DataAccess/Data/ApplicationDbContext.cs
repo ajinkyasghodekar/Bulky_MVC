@@ -26,6 +26,11 @@ namespace BulkyBook.DataAccess.Data
         // Creating table for ShoppingCart
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        // Creating table for OrderHeader
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+
+        // Creating table for OrderDetail
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
